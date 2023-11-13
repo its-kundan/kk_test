@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import imutils
 from std_msgs.msg import String
-from swift_msgs.msg import *
+# from swift_msgs.msg import *
 from std_msgs.msg import Float64
 from geometry_msgs.msg import PoseArray
 from pid_tune.msg import PidTune
@@ -15,6 +15,9 @@ from luminosity_drone.msg import Biolocation
 from imutils import contours
 from skimage import measure
 from sensor_msgs.msg import Image
+# Assuming swift_msgs.msg contains a valid message type for drone commands
+from swift_msgs.msg import SwiftCommand
+
 
 
 class Camera:
@@ -56,7 +59,7 @@ class Camera:
         self.current_waypoint_navigation_index = 0
         self.setpoint = self.waypoint_navigation[self.current_waypoint_navigation_index]
 
-        self.cmd = swift_msgs()
+        self.cmd = SwiftCommand()
         self.cmd.rcRoll = 1500
         self.cmd.rcPitch = 1500
         self.cmd.rcYaw = 1500
@@ -123,7 +126,9 @@ class Camera:
         gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (3, 3), 0)
 
+        # cv2.imshow('Image', gray)
         cv2.imshow('Image', gray)
+        cv2.waitKey(0)
         
         # Threshold the image to reveal light regions in the blurred image
         threshold, thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
