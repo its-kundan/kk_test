@@ -16,6 +16,7 @@ from imutils import contours
 from skimage import measure
 from sensor_msgs.msg import Image
 
+
 class Camera:
 
     def __init__(self):
