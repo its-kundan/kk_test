@@ -251,35 +251,7 @@ This should be the structure of zip file
 - Step 5: Submit this zip file on the portal in the place of Task 2A and check your score.
 
 
-Welcome to LD theme!
-Home
-Bulletin board
-Deadlines
-Learning Section
-Learnings
-Competition Section
-Stage 1
-Task 0
-Task 1
-Task 2
-Resources
-Task 2A
-Task 2B
-Task 2C (bonus)
-Github Challenge
-e-yantra_logo
-
-Robotics Competition
-2023-24
-
-
-
-eYRC 2023-24: Luminosity Drone (LD)
-Home
-Forum
-Logout
-Task 2B
-Locating and Identifying Organism in Their Habitat
+## Task 2B Locating and Identifying Organisms in Their Habitat
 Aim:
 The aim of this task is to fly the Swift drone over the surface of the exoplanet and identify the organism present in the simulation environment in Gazebo.
 Prerequisites
@@ -287,7 +259,7 @@ It is presumed that you have successfully completed Task 1B as well as Task 2A. 
 Installations
 We’ve pushed new code to the exisiting package. You simply need to pull it and run catkin build
 
-
+```
 cd ~/catkin_ws/src/luminosity_drone
 
 git pull origin ros_pkg --recurse-submodules
@@ -299,7 +271,9 @@ catkin build
 cd ~/catkin_ws/src/luminosity_drone/luminosity_drone/src
 
 sudo chmod +x info spawning colony
-Problem Statement
+```
+
+#### Problem Statement
 In this task you will use computer vision techniques to find the location (whycon coordinates) of the image taken from the drone where the organism is detected.
 
 The organisms are simulated using LEDs in the gazebo simulation environment.
@@ -313,8 +287,10 @@ Go to the research station and land the swift drone.
 Procedure
 Launch the Gazebo simulation world containing the arena of the exoplanet by typing the following command
 
-
+```
 roslaunch luminosity_drone task_2b.launch
+```
+
 Make a new python script life_form_detector.py in the lcatkin_ws/src/luminosity_drone/luminosity_drone/scripts folder and complete the script to fly the drone through the arena and detect the organisms.
 
 Make a search algorithm by giving a path to the Swift drone.
@@ -326,20 +302,23 @@ As soon as you detect the organism in the camera frame, try to align th centroid
 The different organism type according to the no. of LEDs are given below:
 
 No. of LEDs	Organism Type
+```
 2	alien_a
 3	alien_b
 4	alien_c
+```
 Once you are confident about the alingment, you have to publish the type of organisms and the Whycon coordinates onto the the following ROS topic astrobiolocation having message type Biolocation
 
 Biolocation Message type:
 
 
-
+```
   arun@eyantra:~/catkin_ws$ rosmsg show luminosity_drone/Biolocation
   string organism_type
   float64 whycon_x 
   float64 whycon_y 
   float64 whycon_z
+```
   
 Finally, go to the position [11, 11, 37], disarm and land the drone at the research station.
 
@@ -349,43 +328,47 @@ The organism will spawn at some random location every time you launch the task.
 Each time an organism is located, publish onto the ROS topic called astrobiolocation only once.
 The time taken to identify the organism is not taken as a parameter for scoring.
 The total evaluation time is 120 secs, so be careful to complete the task within that time frame.
-Recording and Submission instructions
-Step 1: Tune your python script to fly the drone, identify the organism and fly to the research station.
+#### Recording and Submission instructions
+- Step 1: Tune your python script to fly the drone, identify the organism and fly to the research station.
 
-Step 2: Now you need to record your submission, a tool named rosbag helps to record rostopics just as a video. When you feel confident with the performance of your PID controller and you are ready to record the submission, use another launch file which will run the same things as in task_1.launch as well as start the life_form_detector and a node to record rosbag after 5 seconds delay so that gazebo starts and drone is spawned. Use this launch file to implement the task and record a bag file for 2 minute i.e. 120 seconds
-
+- Step 2: Now you need to record your submission, a tool named rosbag helps to record rostopics just as a video. When you feel confident with the performance of your PID controller and you are ready to record the submission, use another launch file which will run the same things as in task_1.launch as well as start the life_form_detector and a node to record rosbag after 5 seconds delay so that gazebo starts and drone is spawned. Use this launch file to implement the task and record a bag file for 2 minute i.e. 120 seconds
+```
 roslaunch luminosity_drone task_2b_submission.launch
-Step 3: This will generate a bag file named life_form_detector_<date_time>.bag in the scripts folder, change the name to LD_<team_id>_life_form_detector.bag, you need to make a zip file containing this bag file and the python script, change the name of python script to LD_<team_id>_life_form_detector.py.
+```
+- Step 3: This will generate a bag file named life_form_detector_<date_time>.bag in the scripts folder, change the name to LD_<team_id>_life_form_detector.bag, you need to make a zip file containing this bag file and the python script, change the name of python script to LD_<team_id>_life_form_detector.py.
 NOTE: The zip should contain only 2 files in the root directory, DO NOT make a folder and then zip, directly zip the two files. You can use this command to zip the file. Use this command only after you have renamed both the files. replace <team_id> with your team id, for eg. if your team id is 1234, then the file names should be LD_1234_life_form_detector.bag and LD_1234_life_form_detector.py.
 
-
+```
 zip -r LD_<team_id>.zip LD_<team_id>_life_form_detector.bag LD_<team_id>_life_form_detector.py
+```
 This should be the structure of zip file
 |__LD_1234.zip
 … |__LD_1234_life_form_detector.bag
 … |__LD_1234_life_form_detector.py
 
-Step 4: Submit this zip file on the portal in the place of Task 2B and check your score.
+- Step 4: Submit this zip file on the portal in the place of Task 2B and check your score.
 YouTube Video
 Record the video using a screen recorder like kazam or simplescreen recorder. You can install them using the following commands:
 
-
+```
 sudo apt install kazam
-
+```
+```
 sudo apt install simplescreenrecorder
+```
 Start recording the video, At the start terminal should be visble where you will launch a file and node.
 
 Once you start your script your screen should have both gazebo and camera output as shown in the following image for most of the time:
 
 
-Upload a one-shot continuous video with the title LD_<team_id>_Task2B (For example: If your team ID is 1234 then, save it as LD_1234_Task2B)
+`Upload a one-shot continuous video with the title LD_<team_id>_Task2B (For example: If your team ID is 1234 then, save it as LD_1234_Task2B)`
 
 Please note that while uploading the video on YouTube select the privacy setting option as Unlisted
 
 
 
 
-##Task 2C (bonus) Exoplanetary Surface Organism Detection and Identification
+## Task 2C (bonus) Exoplanetary Surface Organism Detection and Identification
 Aim:
 The aim of this task is to fly the Swift drone over the surface of the exoplanet and identify the organisms present at different set points in the simulation environment in Gazebo.
 Prerequisites
@@ -404,8 +387,9 @@ Go to the research station and land the swift drone.
 Procedure
 Launch the Gazebo simulation world containing the arena of the exoplanet by typing the following command
 
-
+```
 roslaunch luminosity_drone task_2c.launch
+```
 Make a new python script biota_detector.py in the lcatkin_ws/src/luminosity_drone/luminosity_drone/scripts folder and complete the script to fly the drone through the arena and detect the organisms.
 
 Make a search algorithm by giving a path to the Swift drone.
@@ -417,20 +401,23 @@ As soon as you detect the organism in the camera frame, try to align th centroid
 The different organism type according to the no. of LEDs are given below:
 
 No. of LEDs	Organism Type
+```
 2	alien_a
 3	alien_b
 4	alien_c
+```
 Once you are confident about the alingment, you have to publish the type of organisms and the Whycon coordinates onto the the following ROS topic astrobiolocation having message type Biolocation
 
 Biolocation Message type:
 
-
+```
 
   arun@eyantra:~/catkin_ws$ rosmsg show luminosity_drone/Biolocation
   string organism_type
   float64 whycon_x 
   float64 whycon_y 
   float64 whycon_z
+```
   
 You have to repeat this procedure for every organism present on the exoplanet surface.
 
@@ -442,41 +429,39 @@ The organism will spawn at some random location every time you launch the task.
 Each time an organism is located, publish onto the ROS topic called astrobiolocation only once.
 The time taken to identify the organism is not taken as a parameter for scoring.
 The total evaluation time is 180 secs, so be careful to complete the task within that time frame.
-Recording and Submission instructions
-Step 1: Tune your python script to fly the drone, identify the organism and fly to the research station.
+#### Recording and Submission instructions
+- Step 1: Tune your python script to fly the drone, identify the organism and fly to the research station.
 
-Step 2: Now you need to record your submission, a tool named rosbag helps to record rostopics just as a video. When you feel confident with the performance of your PID controller and you are ready to record the submission, use another launch file which will run the same things as in task_1.launch as well as start the biota_detector and a node to record rosbag after 5 seconds delay so that gazebo starts and drone is spawned. Use this launch file to implement the task and record a bag file for 3 minute i.e. 180 seconds
-
+- Step 2: Now you need to record your submission, a tool named rosbag helps to record rostopics just as a video. When you feel confident with the performance of your PID controller and you are ready to record the submission, use another launch file which will run the same things as in task_1.launch as well as start the biota_detector and a node to record rosbag after 5 seconds delay so that gazebo starts and drone is spawned. Use this launch file to implement the task and record a bag file for 3 minute i.e. 180 seconds
+```
 roslaunch luminosity_drone task_2c_submission.launch
-Step 3: This will generate a bag file named biota_detector_<date_time>.bag in the scripts folder, change the name to LD_<team_id>_biota_detector.bag, you need to make a zip file containing this bag file and the python script, change the name of python script to LD_<team_id>_biota_detector.py.
+```
+- Step 3: This will generate a bag file named biota_detector_<date_time>.bag in the scripts folder, change the name to LD_<team_id>_biota_detector.bag, you need to make a zip file containing this bag file and the python script, change the name of python script to LD_<team_id>_biota_detector.py.
 NOTE: The zip should contain only 2 files in the root directory, DO NOT make a folder and then zip, directly zip the two files. You can use this command to zip the file. Use this command only after you have renamed both the files. replace <team_id> with your team id, for eg. if your team id is 1234, then the file names should be LD_1234_biota_detector.bag and LD_1234_biota_detector.py.
 
-
+```
 zip -r LD_<team_id>.zip LD_<team_id>_biota_detector.bag LD_<team_id>_biota_detector.py
+```
 This should be the structure of zip file
 |__LD_1234.zip
 … |__LD_1234_biota_detector.bag
 … |__LD_1234_biota_detector.py
 
-Step 4: Submit this zip file on the portal in the place of Task 2C and check your score.
+- Step 4: Submit this zip file on the portal in the place of Task 2C and check your score.
 YouTube Video
 Record the video using a screen recorder like kazam or simplescreen recorder. You can install them using the following commands:
 
-
+```
 sudo apt install kazam
 
 sudo apt install simplescreenrecorder
+```
 Start recording the video, At the start terminal should be visble where you will launch a file and node.
 
 Once you start your script your screen should have both gazebo and camera output as shown in the following image for most of the time:
 
 
 Upload a one-shot continuous video with the title LD_<team_id>_Task2C (For example: If your team ID is 1234 then, save it as LD_1234_Task2C)
-
-Please note that while uploading the video on YouTube select the privacy setting option as Unlisted
-
-
-
 
 
 
