@@ -1,4 +1,3 @@
-# eyrc23_LD_1053
 
 # Documentation By Kundan Kumar.
 
